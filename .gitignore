@@ -1,0 +1,16 @@
+db.sqlite3
+/media
+
+/learneep/__pycache__
+
+/blog/__pycache__
+/blog/migrations
+
+/student/__pycache__
+/student/migrations
+
+/teacher/__pycache__
+/teacher/migrations
+
+/developer/__pycache__
+/developer/migrations

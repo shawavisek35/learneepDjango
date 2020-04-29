@@ -17,6 +17,7 @@ class Developer(models.Model):
     gender = models.CharField(max_length = 50)
     account_feature = models.CharField(max_length = 50)
     dob = models.DateField(default=datetime.date.today)
+    accountType = models.CharField(max_length = 50,default="")
     profile_image = models.ImageField(upload_to = "developer/images")
 
     def __str__(self):

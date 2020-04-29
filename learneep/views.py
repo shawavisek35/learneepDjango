@@ -6,6 +6,10 @@ from django.contrib import auth
 from django.contrib.auth.models import User
 from pymongo import MongoClient
 
+from student.models import Student
+from teacher.models import Teacher
+from developer.models import Developer
+
 #connecting with mongo atlas
 client = MongoClient("mongodb+srv://Avisek:Avisek3524@a4-iszf9.azure.mongodb.net/test?retryWrites=true&w=majority")
 
@@ -59,6 +63,28 @@ def register(request):
         }
 
         users.insert_one(newUser)
+
+        if(accountType=="student"):
+            student = Student.objects.create(username = username,first_name = fname,last_name = lname,email = email,contact = contact,
+            alternateContact = alternateContact,email_verified = False,gender = gender,address = address,account_feature = accountFeatures,
+            dob = dob,accountType = accountType)
+
+            student.save()
+
+        elif(accountType=="teacher"):
+            teacher = Teacher.objects.create(username = username,first_name = fname,last_name = lname,email = email,contact = contact,
+            alternateContact = alternateContact,email_verified = False,gender = gender,address = address,account_feature = accountFeatures,
+            dob = dob,accountType = accountType)
+
+            teacher.save()
+
+        elif(accountType=="developer"):
+            developer = Developer.objects.create(username = username,first_name = fname,last_name = lname,email = email,contact = contact,
+            alternateContact = alternateContact,email_verified = False,gender = gender,address = address,account_feature = accountFeatures,
+            dob = dob,accountType = accountType)
+
+            developer.save()
+
     
         user = User.objects.create_user(username=username , email=email , password=pswd)
         user.first_name = fname

@@ -29,7 +29,7 @@
 
 {% load static %}
 
-<div class="pt-4">
+
   <div class="container" style="width: 80%">
     <h1 class="mb-5 text-center">Trending</h1>
     <div id="carouselExampleCaptions" class="carousel slide mb-5 mt-3" data-ride="carousel">
@@ -74,6 +74,7 @@
       <div class="col-md-9">
         <div class="row">
           <div class="col-md-6">
+            
             <div class="row">
               
               <div class="col-md-12 col-sm-12">
@@ -97,10 +98,12 @@
               </div>
 
             </div>
+          
           </div>
           <div class="col-md-6">
+            <div class="container">
             <div class="row">
-              <div class="col-md-12 col-sm-12">
+              <div class="col">
                 <h2 class="mb-4">Subscriptions</h2>
                 <div class="card border-0 mb-5 mt-5" style="width: 18rem;">
                   <img src="{% static 'blog/images/image2.jpg' %}" class="card-img-top" alt="card">
@@ -121,14 +124,14 @@
               </div>
 
             </div>
-            
+            </div>
           </div>
 
         </div>
 
       </div>
-      <div class="col-md-3 ml-auto">
-        
+      <div class="col-md-3">
+        <div class="container">
         <div class="row">
           <div class="col-md-12 ">
             <h2 class="mb-4">Popular stories</h2>
@@ -151,12 +154,13 @@
           </div>
 
         </div>
+        </div>
       </div>
 
 
     </div>
   </div>
-</div>
+
 <script>
   $(document).ready(function(){
 

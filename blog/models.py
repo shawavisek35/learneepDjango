@@ -9,8 +9,10 @@ class BlogPost(models.Model):
     title = models.CharField(max_length=1000)
     article = models.CharField(max_length = 999999999999999)
     category = models.CharField(max_length = 1000)
-    publish_date = models.DateField(default = datetime.date.today)
+    published_date = models.DateField(default = datetime.date.today)
+    tags = models.CharField(max_length=100 , default="general")
     image = models.ImageField(upload_to = "blog/images")
+
 
     def __str__(self):
         return self.title

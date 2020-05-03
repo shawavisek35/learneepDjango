@@ -6,50 +6,85 @@
 
 {% block content %}
     {% load static %}
-    <script src="https://cdn.ckeditor.com/ckeditor5/18.0.0/classic/ckeditor.js"></script>
+    <script src="https://cdn.tiny.cloud/1/ytpaavqlbfsxxm0vvk40dy3pvxhhantx32ywcco3aehmor0f/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 
+    <style>
+        textarea[id=tags]{
+            
+            resize: none;
+        }
+
+        textarea[id="editor"]{
+            height : 100vh;
+        }
+    </style>
 
 
 
     <div class="container-fluid" style="width: 95%;">
-        <div class="row">
-            <div class="col-md-9">
-                <div class="container mt-5">
-                    <form action="{% url 'addPost' %}" method="POST" enctype="multipart/form-data">
-                        <div class="form-group">
-                            <label for="heading"><h4>Heading</h4></label>
-                            <input type="text" name="heading" class="form-control" id="heading">
-                        </div>
-                        <div class="form-group">
-                            <textarea name="editor" id="editor">
+        <form action="{% url 'addPost' %}" method="POST" enctype="multipart/form-data">
+            <div class="row">
+                <div class="col-md-9">
+                    <div class="container mt-5">
+                        
+                            <div class="form-group">
+                                <label for="heading"><h3>Title</h3></label>
+                                <input type="text" name="heading" class="form-control" id="heading" placeholder="Give a creative title to your post..." style="height:60px; font-size: 18pt !important; font-weight: bolder">
+                            </div>
+                            <div class="form-group mt-3">
+                                <label for="heading"><h3>Category</h3></label>
+                                <input type="text" name="category" class="form-control" id="category" placeholder="Add a Category...." style="height:60px; font-size: 18pt !important;">
+                            </div>
+                            <div class="form-group">
+                                <label for="Thumbnail"><h4>Thumbnail</h4></label>
+                                <input type="file" id="thumbnail" name="thumbnail" class="form-control">
+                            </div>
+                            <div class="form-group mt-3">
+                                <label for="article"><h3>Article</h3></label>
+                                <textarea name="editor" id="editor" class="form-control">
 
+                                </textarea>
+                            </div>
+                            
+
+                        
+                    </div>
+
+                </div>
+                <div class="col-md-3">
+                    <div class="container mt-5">
+                        <div class="form-group">
+                            <label for="tags"><h5>Add atleast 5 tags seperated by commas, so readers know what your story is about</h5></label>
+                            <textarea type="text" name="tags" id="tags" class="form-control" placeholder="Enter tags for your post" style="width: 300px; height: 200px; font-size:16pt !important; font-weight: bold !important;">
                             </textarea>
                         </div>
-                        {% csrf_token %}
-                        <div class="form-group text-center">
-                            <button class="btn btn-success" type="submit">Publish</button>
-                        </div>
-
-                    </form>
+                    </div>
+                    
                 </div>
-
             </div>
-            <div class="col-md-3" id="some">
-                <h1>World</h1>
-                <input type="hidden" id="in" value="{{post}}">
-            </div>
-        </div>
+            {% csrf_token %}
+            <div class="form-group text-center">
+                <button class="btn btn-success" type="submit">Publish Now</button>
+            </div>                
+        </form>
     </div>
     <script>
-        ClassicEditor
-            .create( document.querySelector( '#editor' ) )
-            .catch( error => {
-                console.error( error );
-            } );
+        tinymce.init({
+            selector: 'textarea#editor',
+            plugins: 'a11ychecker advcode casechange formatpainter linkchecker autolink lists checklist media mediaembed pageembed permanentpen powerpaste table advtable tinycomments tinymcespellchecker',
+      toolbar: 'a11ycheck addcomment showcomments casechange checklist code formatpainter pageembed permanentpen table',
+      toolbar_mode: 'floating',
+      tinycomments_mode: 'embedded',
+      tinycomments_author: 'Author name',
+              // note the comma at the end of the line!
+           // toolbar: 'code',  // last reminder, note the comma!
+            
+          });
 
-        var element = document.getElementById("some");
+        /*var element = document.getElementById("some");
         var val = document.getElementById("in").value;
         console.log(val)
         element.innerHTML+=val
+        */
     </script>
 {% endblock %}

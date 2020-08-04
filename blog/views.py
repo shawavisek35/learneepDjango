@@ -1,15 +1,8 @@
 from django.shortcuts import render , redirect
-from pymongo import MongoClient
+
 import datetime
-from .models import BlogPost
 
 
-
-#connecting with mongo atlas
-client = MongoClient("mongodb+srv://Avisek:Avisek3524@a4-iszf9.azure.mongodb.net/test?retryWrites=true&w=majority")
-
-db = client.get_database("learneep")
-blogs = db.blogs
 
 # Create your views here.
 

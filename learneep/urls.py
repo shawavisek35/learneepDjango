@@ -16,8 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path , include
 from . import views
-from django.conf import settings
-from django.conf.urls.static import static
+
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -26,11 +26,10 @@ urlpatterns = [
     path("login/" , views.login_main , name="login"),
     path("about/" , views.about , name="about"),
     path("contact/" , views.contact , name="contact"),
-    path("dashboard/" , views.dashboard , name="dashboard"),
-    path("logout/" , views.logout_main , name="logout"),
+    path("googleSheets/" , include("googleSheets.urls")),
     path("blog/" , include("blog.urls")),
     path("student/" , include("student.urls")),
     path("developer/",include("developer.urls")),
     path("teacher/" , include("teacher.urls")),
 
-] + static(settings.MEDIA_URL , document_root = settings.MEDIA_ROOT)
+]

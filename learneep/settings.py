@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'blog',
     'student',
     'teacher',
-    'developer'
+    'developer',
+    'googleSheets'
 ]
 
 MIDDLEWARE = [
@@ -141,6 +142,4 @@ MESSAGE_TAGS = {
     
 }
 
-#maintaining media directory
-MEDIA_ROOT = os.path.join(BASE_DIR,"media")
-MEDIA_URL = "/media/"
+

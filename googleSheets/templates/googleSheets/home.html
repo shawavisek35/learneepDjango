@@ -1,0 +1,93 @@
+{% extends "googleSheets/base.html" %}
+
+{% block title %}
+    Show Response
+
+{% endblock %}
+
+{% block content %}
+<style>
+    
+    @import url('https://fonts.googleapis.com/css2?family=Caveat&family=Lobster&display=swap');
+    
+    .a-btn{
+        color: white;
+
+    }
+    .a-btn:hover{
+        color: white;
+        text-decoration: none;
+    }
+    .name{
+        color: black;
+        font-family: "Lobster" , cursive;;
+    }
+    .name-email{
+        color:black;
+        font-family: "Caveat" , cursive;
+        font-size: 25px;
+        letter-spacing: 1px;
+    }
+    .name-modal{
+        font-family: "Caveat" , cursive;
+        font-size: 25px;
+        letter-spacing: 2px
+    }
+</style>
+
+{% load static %}
+{% if isActive %}
+{% for response in responses %}
+    <div class="container bttn">
+        <div class="container shadow-lg rounded mt-4 py-5" role="alert" >
+            <div class="row"> 
+                <div class="col-md-6 col-sm-12">
+                    <h3 class="name">Name : {{response.Name}}</h3>
+                    <p class="name-email">Email : {{response.Email}}</p>
+                </div>
+                <div class="col-md-6 col-sm-12 mt-2">
+                    <div class=" float-right">
+                        <button type="button" data-toggle="modal" data-target="#viewResponse{{response.Row_id}}" class="btn btn-success mt-2">View Response</button>
+                        
+                    </div>
+                </div>
+            </div>
+                        <!-- Modal -->
+            <div class="modal fade" id="viewResponse{{response.Row_id}}" tabindex="-1" role="dialog" aria-labelledby="viewResponseTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">{{response.Name}}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    </div>
+                    <div class="modal-body name-modal">
+                        {{response.Response}}
+                    </div>
+                    <div class="modal-footer">
+                        
+                        {% if response.Email_send == "FALSE" %}
+                            <button class="btn btn-danger ml-2 mt-2"><a class="a-btn" href="send_mail/{{response.Email}}/{{response.Row_id}}">Accept Response</a></button>
+                            <button class="btn btn-danger ml-2 mt-2"><a class="a-btn" href="dont_send_mail/{{response.Email}}/{{response.Row_id}}">Reject Response</a></button>
+                        {% else %}
+                            {% if response.Is_accepted == "FALSE" %}
+                                <button class="btn btn-secondary ml-2 mt-2">Close</button>
+                                <button class="btn btn-secondary ml-2 mt-2">Rejected</button>
+                            {% else %}
+                                <button class="btn btn-secondary ml-2 mt-2">Close</button>
+                                <button class="btn btn-secondary ml-2 mt-2">Accepted</button>
+                            {% endif %}
+                        {% endif %}
+
+                    </div>
+                </div>
+                </div>
+            </div>
+           
+          </div>
+    </div>
+{% endfor %}
+{% endif %}
+
+{% endblock %}

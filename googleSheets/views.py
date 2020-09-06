@@ -16,14 +16,13 @@ import os
 
 #defining scopes
 scope = [
-    'https://spreadsheets.google.com/feeds',
-    'https://www.googleapis.com/auth/drive'
+    
 ]
 
 
 
 #getting the credentials
-creds = ServiceAccountCredentials.from_json_keyfile_name('/home/avisek/Desktop/work/Google-sheets-django/googleSheets/client_secret.json',scope)
+creds = #get your credentials here
 
 
 
@@ -52,19 +51,13 @@ def sendMail(request,email,row):
     row = int(row)
 
     files = [
-        "/home/avisek/Desktop/work/Google-sheets-django/googleSheets/static/googleSheets/images/image1.png",
-        "/home/avisek/Desktop/work/Google-sheets-django/googleSheets/static/googleSheets/images/image2.png",
-        "/home/avisek/Desktop/work/Google-sheets-django/googleSheets/static/googleSheets/images/image3.png",
-        "/home/avisek/Desktop/work/Google-sheets-django/googleSheets/static/googleSheets/images/image4.png",
-        "/home/avisek/Desktop/work/Google-sheets-django/googleSheets/static/googleSheets/images/image5.png",
-        "/home/avisek/Desktop/work/Google-sheets-django/googleSheets/static/googleSheets/images/image6.png"
-
+        
     ]
 
     col_count = len(responses[0])
 
     mail = MIMEMultipart()
-    mail['From'] = "agentavishek@gmail.com"
+    mail['From'] = "youremail@xyz.xom"
     mail["To"] = email
     mail['Subject'] = "No-Reply"
 
@@ -85,10 +78,10 @@ def sendMail(request,email,row):
 
     smtp_session.starttls()
 
-    smtp_session.login("agentavishek@gmail.com" , "Avisek@3524")
+    smtp_session.login("youremail@email.com" , "yourpassword")
 
     try:
-        smtp_session.sendmail("agentavishek@gmail.com",email,mail.as_string())
+        smtp_session.sendmail("email@email.com",email,mail.as_string())
         messages.success(request,"Message successfully send.....")
         smtp_session.quit()
         sheet.update_cell(row+1,col_count-1 , "TRUE")
@@ -105,12 +98,6 @@ def dontSendMail(request,email,row):
     row = int(row)
 
     files = [
-        "/home/avisek/Desktop/work/Google-sheets-django/googleSheets/static/googleSheets/images/image1.png",
-        "/home/avisek/Desktop/work/Google-sheets-django/googleSheets/static/googleSheets/images/image2.png",
-        "/home/avisek/Desktop/work/Google-sheets-django/googleSheets/static/googleSheets/images/image3.png",
-        "/home/avisek/Desktop/work/Google-sheets-django/googleSheets/static/googleSheets/images/image4.png",
-        "/home/avisek/Desktop/work/Google-sheets-django/googleSheets/static/googleSheets/images/image5.png",
-        "/home/avisek/Desktop/work/Google-sheets-django/googleSheets/static/googleSheets/images/image6.png"
 
     ]
 
@@ -121,10 +108,9 @@ def dontSendMail(request,email,row):
 
     smtp_session.starttls()
 
-    smtp_session.login("agentavishek@gmail.com" , "Avisek@3524")
-
+    smtp_session.login("youremail@email.com" , "yourpassword")
     mail = MIMEMultipart()
-    mail['From'] = "agentavishek@gmail.com"
+    mail['From'] = "your email"
     mail["To"] = email
     mail['Subject'] = "No-Reply"
 
@@ -142,7 +128,7 @@ def dontSendMail(request,email,row):
         mail.attach(file_to_send)
 
     try:
-        smtp_session.sendmail("agentavishek@gmail.com",email,mail.as_string())
+        smtp_session.sendmail("email",email,mail.as_string())
         messages.success(request,"Message successfully send.....")
         smtp_session.quit()
         sheet.update_cell(row+1,col_count-1 , "TRUE")
